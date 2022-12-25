@@ -1,0 +1,19 @@
+{
+  "name": "jwt-decoder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jwt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mokuteki225/jwt-decoder.git"
+  },
+  "author": "Vlad Kondratiuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mokuteki225/jwt-decoder/issues"
+  },
+  "homepage": "https://github.com/mokuteki225/jwt-decoder#readme"
+}
