@@ -1,5 +1,5 @@
 {
-  "name": "jwt-decoder",
+  "name": "jwt",
   "version": "1.0.0",
   "description": "",
   "main": "jwt.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mokuteki225/jwt-decoder.git"
+    "url": "git+https://github.com/mokuteki225/jwt.git"
   },
   "author": "Vlad Kondratiuk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mokuteki225/jwt-decoder/issues"
+    "url": "https://github.com/mokuteki225/jwt/issues"
   },
-  "homepage": "https://github.com/mokuteki225/jwt-decoder#readme"
+  "homepage": "https://github.com/mokuteki225/jwt#readme"
 }
