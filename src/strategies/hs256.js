@@ -26,7 +26,15 @@ class HS256Strategy {
     return jwt;
   }
 
-  verify() {}
+  verify(token) {
+    const [b64uHeader, b64uPayload, candidateSignature] = token.split('.');
+    if (b64uHeader !== this.#b64uHeader) {
+      return false;
+    }
+    const unsigned = `${b64uHeader}.${b64uPayload}`;
+    const signature = this.#sign(unsigned);
+    return candidateSignature === signature;
+  }
 
   #sign(unsigned) {
     const signed = crypto.createHmac('sha256', this.#secret)
