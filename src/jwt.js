@@ -7,8 +7,8 @@ class Jwt {
     this.strategy = strategy;
   }
 
-  generate(payload) {
-    return this.strategy.generate(payload);
+  generate(payload, options) {
+    return this.strategy.generate(payload, options);
   }
 
   verify(token) {
