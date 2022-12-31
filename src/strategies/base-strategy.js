@@ -41,7 +41,6 @@ class BaseStrategy {
   verify(token) {
     const [b64uHeader, b64uPayload, candidateSignature] = token.split('.');
 
-    console.log(b64uHeader, this.#b64uHeader);
     if (b64uHeader !== this.#b64uHeader) {
       throw new InvalidHeaderError();
     }
