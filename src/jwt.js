@@ -1,3 +1,5 @@
+'use strict';
+
 class Jwt {
   constructor(strategy) {
     this.strategy = strategy;
