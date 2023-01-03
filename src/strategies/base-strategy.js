@@ -1,11 +1,11 @@
 'use strict';
 
-const { Base64UrlConverter } = require('../common/base-64-url-converter');
+const { Base64UrlConverter } = require('../common/base-64-url-converter.js');
 const { JwtExpiredError } = require('../errors/jwt-expired-error.js');
 const { AbstractClassError } = require('../errors/abstract-class-error.js');
 const { AbstractMethodError } = require('../errors/abstract-method-error.js');
 const { InvalidHeaderError } = require('../errors/invalid-header-error.js');
-const { InvalidSignatureError } = require('../errors/invalid-signature-error');
+const { InvalidSignatureError } = require('../errors/invalid-signature-error.js');
 
 /**
  * Abstract base strategy 
