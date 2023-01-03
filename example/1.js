@@ -8,8 +8,8 @@ const jwt = new Jwt(new HS256Strategy({
   ttl: 100000,
 }));
 const token = jwt.generate({ id: '123' });
-const invalid_header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVDEifQ.eyJpZCI6IjEyMyJ9.6UgQKiKBs4205qS7ZDXNtciCQXqsVuCwqmITDnHpwck';
-const invalid_signature = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEyMyJ9.GTnN3wAmn5R1lZM6VEAqgTedHeJtPm67i-fOD3hNRG0';
+const invalid_header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVDEifQ.eyJpZCI6IjEyMyIsImV4cCI6IjExNjcyNjc2NzQxNjM0In0.67iDd-sQQ-vIV6xJNxd7jfw49COMVpTdlsDO1B7D4l0';
+const invalid_signature = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMyIsImV4cCI6IjExNjcyNjc2NzQxNjM0In0.II6vtdyDd7qHnnWAmLCrYA99GgGLjru1tyXwbpKAkKI';
 
 try {
   console.log(jwt.verify(token)); // true 
@@ -26,7 +26,7 @@ try {
 try {
   console.log(jwt.verify(invalid_signature)); // false
 } catch (err) {
-  console.log('1111', err);
+  console.log(err);
 }
 
 const expired_token = jwt.generate({ id: '123' }, { ttl: 2000 })
