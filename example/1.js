@@ -3,6 +3,24 @@
 const { Jwt } = require('../src/jwt.js');
 const { HS256Strategy} = require('../src/strategies/hs256.js');
 
+try {
+  const typeError = new Jwt(new HS256Strategy({
+    secret: 'JWT_SECRET',
+    ttl: 'invalid'
+  }));
+} catch (err) {
+  console.log(err);
+}
+
+try {
+  const typeError = new Jwt(new HS256Strategy({
+    secret: 'JWT_SECRET',
+    ttl: -1,
+  }));
+} catch (err) {
+  console.log(err);
+}
+
 const jwt = new Jwt(new HS256Strategy({
   secret: 'JWT_SECRET',
   ttl: 100000,

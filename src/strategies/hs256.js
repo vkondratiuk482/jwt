@@ -2,6 +2,7 @@
 
 const crypto = require('node:crypto');
 const { BaseStrategy } = require('./base-strategy.js');
+const { TypeValidator } = require('../common/type-validator.js');
 
 /**
  * Strategy for HS256 symmetric hashing algorithm
@@ -11,6 +12,8 @@ class HS256Strategy extends BaseStrategy {
   
   constructor(options) {
     const typ = 'JWT', alg = 'HS256';
+
+    TypeValidator.validateJwtOptions(options);
 
     super({ typ, alg, ttl: options.ttl });
 
