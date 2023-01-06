@@ -1,7 +1,5 @@
 'use strict';
 
-const { TypeValidator } = require('../common/type-validator.js');
-
 /**
  * Strategy for HS256 symmetric hashing algorithm
  */ 
@@ -12,8 +10,6 @@ class RS256Strategy {
   constructor(options) {
     const typ = 'JWT', alg = 'RS256';
 
-    TypeValidator.validateJwtOptions(options);
- 
     super({ typ, alg, ttl: options.ttl });
 
     this.#publicKey = options.publicKey;

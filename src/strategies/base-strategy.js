@@ -1,5 +1,6 @@
 'use strict';
 
+const { TypeValidator } = require('../common/type-validator.js');
 const { Base64UrlConverter } = require('../common/base-64-url-converter.js');
 const { JwtExpiredError } = require('../errors/jwt-expired-error.js');
 const { AbstractClassError } = require('../errors/abstract-class-error.js');
@@ -18,6 +19,8 @@ class BaseStrategy {
     if (this.constructor === BaseStrategy) {
       throw new AbstractClassError();
     }
+
+    TypeValidator.validateBaseStrategyOptions(options);
 
     const { alg, typ, ttl } = options;
 
