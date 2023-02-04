@@ -1,22 +1,26 @@
 'use strict';
 
+const crypto = require('node:crypto');
+
 /**
- * Strategy for HS256 symmetric hashing algorithm
+ * Strategy for RS256 asymmetric hashing algorithm
  */ 
 class RS256Strategy {
   #publicKey;
   #privateKey;
 
   constructor(options) {
-    const typ = 'JWT', alg = 'RS256';
-
-    super({ typ, alg, ttl: options.ttl });
-
     this.#publicKey = options.publicKey;
     this.#privateKey = options.privateKey;
+    const header = { typ: 'JWT', alg: 'RS256' };
+    super({ header, ttl: options.ttl });
   }
 
   sign(unsigned) {
-    throw new Error('Not implemented');
+    const signed = crypto.createSign('RSA-SHA256')
+      .update(unsigned)
+      .sign(this.#privateKey);
+    const b64USigned = signed.toString('base64url');
+    return b64USigned;
   } 
 }
