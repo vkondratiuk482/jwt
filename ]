@@ -17,15 +17,7 @@ const keys = crypto.generateKeyPairSync('rsa', {
   },
 });
 
-fs.writeFile('./pub.pem', keys.publicKey, (err, data) => {
-  if (err) console.log(err);
-  console.log(data);
-});
-
-fs.writeFile('./priv.pem', keys.privateKey, (err, data) => {
-  if (err) console.log(err);
-  console.log(data);
-});
+fs.writeFile('./pub.pem', keys.publicKey);
 
 const jwt = new Jwt(new RS256Strategy({
   ...keys,
@@ -36,7 +28,6 @@ const invalid_header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVDEifQ.eyJpZCI6IjEyMyIsI
 const invalid_signature = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMyIsImV4cCI6IjExNjcyNjc2NzQxNjM0In0.II6vtdyDd7qHnnWAmLCrYA99GgGLjru1tyXwbpKAkKI';
 
 try {
-  console.log(token);
   console.log(jwt.verify(token)); // true 
 } catch (err) {
   console.log(err);

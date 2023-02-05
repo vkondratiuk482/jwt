@@ -21,12 +21,31 @@ class BaseStrategy {
     this.#b64uHeader= Base64UrlConverter.toString(options.header);
   }
 
-  get ttl() {
-    return this.#ttl;
+  sign() {
+    throw new AbstractMethodError();
   }
 
-  get b64uHeader() {
-    return this.#b64uHeader;
+  validateSignature() {
+    throw new AbstractMethodError();
+  }
+
+  generate(payload, options = {}) {
+    const exp = Date.now() + (options.ttl || this.#ttl);
+    const patched = Object.assign(payload, { exp }); const b64uPayload = Base64UrlConverter.toString(patched);
+    const unsigned = `${this.#b64uHeader}.${b64uPayload}`;
+    const signature = this.sign(unsigned);
+    const jwt = `${unsigned}.${signature}`;
+    return jwt;
+  }
+
+  verify(token) {
+    const [b64uHeader, b64uPayload, signature] = token.split('.');
+    const payload = Base64UrlConverter.toJSON(b64uPayload);
+    const unsigned = `${b64uHeader}.${b64uPayload}`;
+    this.validateHeader(b64uHeader); 
+    this.validatePayload(payload);
+    this.validateSignature(unsigned, signature);
+    return payload;
   }
 
   validateHeader(b64uHeader) {
@@ -43,18 +62,6 @@ class BaseStrategy {
       throw new JwtExpiredError();
     }
     return true;
-  }
-
-  sign() {
-    throw new AbstractMethodError(); 
-  }
-
-  verify() {
-    throw new AbstractMethodError(); 
-  }
-
-  decode() {
-    throw new AbstractMethodError(); 
   }
 }
 
