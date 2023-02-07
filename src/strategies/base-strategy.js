@@ -1,5 +1,6 @@
 'use strict';
 
+const { TypeValidator } = require('../common/type-validator.js');
 const { Base64UrlConverter } = require('../common/base-64-url-converter.js');
 const { AbstractClassError } = require('../errors/abstract-class-error.js');
 const { AbstractMethodError } = require('../errors/abstract-method-error.js');
@@ -17,6 +18,9 @@ class BaseStrategy {
     if (this.constructor === BaseStrategy) {
       throw new AbstractClassError();
     }
+    
+    TypeValidator.validateBaseStrategyOptions(options);
+
     this.#ttl = options.ttl;
     this.#b64uHeader= Base64UrlConverter.toString(options.header);
   }
