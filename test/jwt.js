@@ -1,11 +1,11 @@
 const assert = require('node:assert');
 const { describe, it } = require('node:test');
-const { Jwt } = require('../src/jwt.js');
-const { HS256Strategy } = require('../src/strategies/hs256.js');
-const { RS256Strategy } = require('../src/strategies/rs256.js');
-const { InvalidHeaderError } = require('../src/errors/invalid-header-error.js');
-const { InvalidSignatureError } = require('../src/errors/invalid-signature-error.js');
-const { JwtExpiredError } = require('../src/errors/jwt-expired-error.js');
+const { Jwt } = require('../lib/jwt.js');
+const { HS256Strategy } = require('../lib/strategies/hs256.js');
+const { RS256Strategy } = require('../lib/strategies/rs256.js');
+const { InvalidHeaderError } = require('../lib/errors/invalid-header-error.js');
+const { InvalidSignatureError } = require('../lib/errors/invalid-signature-error.js');
+const { JwtExpiredError } = require('../lib/errors/jwt-expired-error.js');
 
 const secret = 'ANY_SECRET';
 const payload = { id: 1 };
