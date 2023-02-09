@@ -4,7 +4,7 @@
   "description": "",
   "main": "jwt.js",
   "scripts": {
-    "test": "node --test test/jwt.js"
+    "test": "node --test test/suits/"
   },
   "repository": {
     "type": "git",
