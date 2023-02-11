@@ -10,10 +10,16 @@
     "type": "git",
     "url": "git+https://github.com/mokuteki225/jwt.git"
   },
-  "author": "Vlad Kondratiuk",
+  "author": "Vladyslav Kondratiuk",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mokuteki225/jwt/issues"
   },
-  "homepage": "https://github.com/mokuteki225/jwt#readme"
+  "homepage": "https://github.com/mokuteki225/jwt#readme",
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.4"
+  }
 }

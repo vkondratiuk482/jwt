@@ -14,11 +14,13 @@ const rs256Fixtures = fixtures.generateRS256Fixtures();
 
 describe('RS256Strategy', () => {
   it('Successfully create and verify token', () => {
-    const jwt = new JSONWebToken(new RS256Strategy({
-      ttl: 10000,
-      publicKey: rs256Fixtures.keys.publicKey,
-      privateKey: rs256Fixtures.keys.privateKey,
-    }));
+    const jwt = new JSONWebToken(
+      new RS256Strategy({
+        ttl: 10000,
+        publicKey: rs256Fixtures.keys.publicKey,
+        privateKey: rs256Fixtures.keys.privateKey,
+      }),
+    );
 
     const token = jwt.generate(rs256Fixtures.payload);
     const decoded = jwt.verify(token);
@@ -52,11 +54,13 @@ describe('RS256Strategy', () => {
 
   it('InvalidHeaderError', () => {
     const handler = () => {
-      const jwt = new JSONWebToken(new RS256Strategy({
-        ttl: 10000,
-        publicKey: rs256Fixtures.keys.publicKey,
-        privateKey: rs256Fixtures.keys.privateKey,
-      }));
+      const jwt = new JSONWebToken(
+        new RS256Strategy({
+          ttl: 10000,
+          publicKey: rs256Fixtures.keys.publicKey,
+          privateKey: rs256Fixtures.keys.privateKey,
+        }),
+      );
 
       jwt.verify(rs256Fixtures.invalid_header);
     };
@@ -66,11 +70,13 @@ describe('RS256Strategy', () => {
 
   it('InvalidSignatureError', () => {
     const handler = () => {
-      const jwt = new JSONWebToken(new RS256Strategy({
-        ttl: 10000,
-        publicKey: rs256Fixtures.keys.publicKey,
-        privateKey: rs256Fixtures.keys.privateKey,
-      }));
+      const jwt = new JSONWebToken(
+        new RS256Strategy({
+          ttl: 10000,
+          publicKey: rs256Fixtures.keys.publicKey,
+          privateKey: rs256Fixtures.keys.privateKey,
+        }),
+      );
 
       jwt.verify(rs256Fixtures.invalid_signature);
     };
@@ -79,11 +85,13 @@ describe('RS256Strategy', () => {
   });
 
   it('JwtExpiredError with options passed in constructor', (done) => {
-    const jwt = new JSONWebToken(new RS256Strategy({
-      ttl: 1000,
-      publicKey: rs256Fixtures.keys.publicKey,
-      privateKey: rs256Fixtures.keys.privateKey,
-    }));
+    const jwt = new JSONWebToken(
+      new RS256Strategy({
+        ttl: 1000,
+        publicKey: rs256Fixtures.keys.publicKey,
+        privateKey: rs256Fixtures.keys.privateKey,
+      }),
+    );
 
     const token = jwt.generate(rs256Fixtures.payload);
     const decoded = jwt.verify(token);
@@ -92,7 +100,7 @@ describe('RS256Strategy', () => {
 
     setTimeout(() => {
       try {
-        jwt.verify(token)
+        jwt.verify(token);
       } catch (err) {
         assert(err instanceof JwtExpiredError);
         done();
@@ -101,11 +109,13 @@ describe('RS256Strategy', () => {
   });
 
   it('Prevent JwtExpiredError by overriding options in "generate" method', (done) => {
-    const jwt = new JSONWebToken(new RS256Strategy({
-      ttl: 1000,
-      publicKey: rs256Fixtures.keys.publicKey,
-      privateKey: rs256Fixtures.keys.privateKey,
-    }));
+    const jwt = new JSONWebToken(
+      new RS256Strategy({
+        ttl: 1000,
+        publicKey: rs256Fixtures.keys.publicKey,
+        privateKey: rs256Fixtures.keys.privateKey,
+      }),
+    );
 
     const token = jwt.generate(rs256Fixtures.payload, { ttl: 3000 });
     const decoded = jwt.verify(token);
@@ -114,7 +124,7 @@ describe('RS256Strategy', () => {
 
     setTimeout(() => {
       try {
-        jwt.verify(token)
+        jwt.verify(token);
         done();
       } catch (err) {
         // won't happen

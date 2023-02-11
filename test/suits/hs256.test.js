@@ -14,10 +14,12 @@ const hs256Fixtures = fixtures.generateHS256Fixtures();
 
 describe('HS256Strategy', () => {
   it('Successfully create and verify token', () => {
-    const jwt = new JSONWebToken(new HS256Strategy({
-      ttl: 10000,
-      secret: hs256Fixtures.secret,
-    }));
+    const jwt = new JSONWebToken(
+      new HS256Strategy({
+        ttl: 10000,
+        secret: hs256Fixtures.secret,
+      }),
+    );
 
     const token = jwt.generate(hs256Fixtures.payload);
     const decoded = jwt.verify(token);
@@ -49,10 +51,12 @@ describe('HS256Strategy', () => {
 
   it('InvalidHeaderError', () => {
     const handler = () => {
-      const jwt = new JSONWebToken(new HS256Strategy({
-        ttl: 10000,
-        secret: hs256Fixtures.secret,
-      }));
+      const jwt = new JSONWebToken(
+        new HS256Strategy({
+          ttl: 10000,
+          secret: hs256Fixtures.secret,
+        }),
+      );
 
       jwt.verify(hs256Fixtures.invalid_header);
     };
@@ -62,10 +66,12 @@ describe('HS256Strategy', () => {
 
   it('InvalidSignatureError', () => {
     const handler = () => {
-      const jwt = new JSONWebToken(new HS256Strategy({
-        ttl: 10000,
-        secret: hs256Fixtures.secret,
-      }));
+      const jwt = new JSONWebToken(
+        new HS256Strategy({
+          ttl: 10000,
+          secret: hs256Fixtures.secret,
+        }),
+      );
 
       jwt.verify(hs256Fixtures.invalid_signature);
     };
@@ -74,10 +80,12 @@ describe('HS256Strategy', () => {
   });
 
   it('JwtExpiredError with options passed in constructor', (done) => {
-    const jwt = new JSONWebToken(new HS256Strategy({
-      ttl: 1000,
-      secret: hs256Fixtures.secret,
-    }));
+    const jwt = new JSONWebToken(
+      new HS256Strategy({
+        ttl: 1000,
+        secret: hs256Fixtures.secret,
+      }),
+    );
 
     const token = jwt.generate(hs256Fixtures.payload);
     const decoded = jwt.verify(token);
@@ -86,7 +94,7 @@ describe('HS256Strategy', () => {
 
     setTimeout(() => {
       try {
-        jwt.verify(token)
+        jwt.verify(token);
       } catch (err) {
         assert(err instanceof JwtExpiredError);
         done();
@@ -95,10 +103,12 @@ describe('HS256Strategy', () => {
   });
 
   it('Prevent JwtExpiredError by overriding options in "generate" method', (done) => {
-    const jwt = new JSONWebToken(new HS256Strategy({
-      ttl: 1000,
-      secret: hs256Fixtures.secret,
-    }));
+    const jwt = new JSONWebToken(
+      new HS256Strategy({
+        ttl: 1000,
+        secret: hs256Fixtures.secret,
+      }),
+    );
 
     const token = jwt.generate(hs256Fixtures.payload, { ttl: 3000 });
     const decoded = jwt.verify(token);
@@ -107,7 +117,7 @@ describe('HS256Strategy', () => {
 
     setTimeout(() => {
       try {
-        jwt.verify(token)
+        jwt.verify(token);
         done();
       } catch (err) {
         // won't happen
