@@ -1,7 +1,7 @@
 {
-  "name": "jwt",
+  "name": "@mokuteki/jwt",
   "version": "1.0.0",
-  "description": "",
+  "description": "Generate and decode JSON Web Tokens using symmetric or asymmetric hashing algorithms",
   "main": "jwt.js",
   "types": "types/jwt.d.ts",
   "scripts": {
@@ -24,5 +24,17 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5"
-  }
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": [
+    "jwt",
+    "jsonwebtoken",
+    "hashing",
+    "hs256",
+    "rs256",
+    "cryptography"
+  ]
 }
