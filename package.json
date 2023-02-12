@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "jwt.js",
+  "types": "types/jwt.d.ts",
   "scripts": {
     "test": "node --test test/suits/"
   },
@@ -17,9 +18,11 @@
   },
   "homepage": "https://github.com/mokuteki225/jwt#readme",
   "devDependencies": {
+    "@types/node": "^18.13.0",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.5"
   }
 }
