@@ -59,5 +59,5 @@ export class JSONWebToken {
 
   generate(payload: object, options?: JSONWebTokenOptions): string;
 
-  verify<T extends object>(token: string): T;
+  verify<T extends object>(token: string, options?: JSONWebTokenOptions): T;
 }
