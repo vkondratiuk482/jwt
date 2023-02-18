@@ -132,7 +132,7 @@ describe('RS256Strategy', () => {
     }, 2000);
   });
 
-  it('Generate JWT with overrided secret', () => {
+  it('Generate JWT with overrided public/private keys', () => {
     const jwt = new JSONWebToken(
       new RS256Strategy({
         ttl: 1000,
