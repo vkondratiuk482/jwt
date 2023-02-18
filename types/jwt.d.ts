@@ -33,7 +33,7 @@ export interface RS256StrategyOptions {
 
   readonly publicKey: string;
 
-  readonly privKey: string;
+  readonly privateKey: string;
 }
 
 export class HS256Strategy extends BaseStrategy {

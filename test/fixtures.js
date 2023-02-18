@@ -4,6 +4,7 @@ const crypto = require('node:crypto');
 
 const generateHS256Fixtures = () => ({
   secret: crypto.randomBytes(16).toString(),
+  newSecret: crypto.randomBytes(16).toString(),
   payload: {
     id: crypto.randomUUID(),
   },
@@ -19,6 +20,17 @@ const generateRS256Fixtures = () => ({
     id: crypto.randomUUID(),
   },
   keys: crypto.generateKeyPairSync('rsa', {
+    modulusLength: 1024,
+    publicKeyEncoding: {
+      type: 'spki',
+      format: 'pem',
+    },
+    privateKeyEncoding: {
+      type: 'pkcs8',
+      format: 'pem',
+    },
+  }),
+  newKeys: crypto.generateKeyPairSync('rsa', {
     modulusLength: 1024,
     publicKeyEncoding: {
       type: 'spki',

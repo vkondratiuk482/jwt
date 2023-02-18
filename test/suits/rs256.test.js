@@ -131,4 +131,37 @@ describe('RS256Strategy', () => {
       }
     }, 2000);
   });
+
+  it('Generate JWT with overrided secret', () => {
+    const jwt = new JSONWebToken(
+      new RS256Strategy({
+        ttl: 1000,
+        publicKey: rs256Fixtures.keys.publicKey,
+        privateKey: rs256Fixtures.keys.privateKey,
+      }),
+    );
+
+    const token = jwt.generate(rs256Fixtures.payload);
+    const decoded = jwt.verify(token);
+
+    assert.deepStrictEqual(decoded, rs256Fixtures.payload);
+
+    const newToken = jwt.generate(rs256Fixtures.payload, {
+      publicKey: rs256Fixtures.newKeys.publicKey,
+      privateKey: rs256Fixtures.newKeys.privateKey,
+    });
+
+    const handler = () => {
+      jwt.verify(newToken);
+    };
+
+    assert.throws(handler, InvalidSignatureError);
+
+    const newDecoded = jwt.verify(newToken, {
+      publicKey: rs256Fixtures.newKeys.publicKey,
+      privateKey: rs256Fixtures.newKeys.privateKey,
+    });
+
+    assert.deepStrictEqual(newDecoded, rs256Fixtures.payload);
+  });
 });

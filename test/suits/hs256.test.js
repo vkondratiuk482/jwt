@@ -124,4 +124,34 @@ describe('HS256Strategy', () => {
       }
     }, 2000);
   });
+
+  it('Generate JWT with overrided secret', () => {
+    const jwt = new JSONWebToken(
+      new HS256Strategy({
+        ttl: 1000,
+        secret: hs256Fixtures.secret,
+      }),
+    );
+
+    const token = jwt.generate(hs256Fixtures.payload);
+    const decoded = jwt.verify(token);
+
+    assert.deepStrictEqual(decoded, hs256Fixtures.payload);
+
+    const newToken = jwt.generate(hs256Fixtures.payload, {
+      secret: hs256Fixtures.newSecret,
+    });
+
+    const handler = () => {
+      jwt.verify(newToken);
+    };
+
+    assert.throws(handler, InvalidSignatureError);
+
+    const newDecoded = jwt.verify(newToken, {
+      secret: hs256Fixtures.newSecret,
+    });
+
+    assert.deepStrictEqual(newDecoded, hs256Fixtures.payload);
+  });
 });
