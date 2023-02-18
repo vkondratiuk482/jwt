@@ -78,5 +78,25 @@ setTimeout(() => {
 }, 2000);
 ```
 
+```javascript
+const { JSONWebToken, HS256Strategy } = require('@mokuteki/jwt');
+
+const strategy = new HS256Strategy({
+  ttl: 10000,
+  secret: 'YOUR_SECRET',
+});
+
+const jwt = new JSONWebToken(strategy);
+const payload = { id: 1 };
+
+const token = jwt.generate(payload, { ttl: 20000, secret: 'NEW_SECRET' });
+
+try {
+  const decoded = jwt.verify(token);
+} catch (err) {
+  // err instanceof InvalidSignatureError
+}
+```
+
 ## License
 Licensed under [MIT](https://github.com/mokuteki225/jwt/blob/master/LICENSE.md)
